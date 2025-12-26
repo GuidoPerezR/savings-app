@@ -1,9 +1,19 @@
+import '@fontsource-variable/plus-jakarta-sans/index.css';
+import { Route, Routes } from 'react-router';
+import { HomePage } from './pages/Home.tsx';
+import { Header } from './components/layout/Header.tsx';
+import { Footer } from './components/layout/Footer.tsx';
+import { LoginPage } from './pages/Login.tsx';
+
 function App() {
   return (
     <>
-      <div className="min-h-dvh bg-black justify-center items-center flex text-white">
-        <h1>Savings app</h1>
-      </div>
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+      <Footer />
     </>
   );
 }
