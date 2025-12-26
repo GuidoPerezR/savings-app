@@ -1,12 +1,20 @@
 import { useId } from 'react';
 import { Google } from '@/components/icons/Google';
 import { GitHub } from '@/components/icons/Github';
+import { useAuthStore } from '@/store/authStore';
+import { useNavigate } from 'react-router';
 
 export function LoginPage() {
   const emailInput = useId();
   const passwordInput = useId();
+  const navigate = useNavigate();
+  const login = useAuthStore((state) => state.login);
 
-  
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    login();
+    navigate('/dashboard');
+  };
 
   return (
     <main className="flex min-h-dvh items-center justify-center bg-dark px-5 py-32 font-jakarta-sans text-light">
@@ -18,7 +26,7 @@ export function LoginPage() {
           Gestiona tus ahorros de forma inteligente
         </small>
 
-        <form className="mt-6 flex flex-col">
+        <form className="mt-6 flex flex-col" onSubmit={handleSubmit}>
           <label htmlFor={emailInput} className="font-semibold">
             Correo Electronico
           </label>
