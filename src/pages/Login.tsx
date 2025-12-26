@@ -1,22 +1,72 @@
-export function LoginPage() {
-  return (
-    <main className="flex min-h-dvh w-full items-center justify-center bg-dark px-5 py-10 font-jakarta-sans text-light">
-      <section>
-        <div className="flex w-full max-w-md flex-col gap-6 rounded-lg bg-secondary p-10 shadow-lg">
-          <h1 className="text-center text-2xl font-bold">Iniciar sesion</h1>
+import { useId } from 'react';
+import { Google } from '@/components/icons/Google';
+import { GitHub } from '@/components/icons/Github';
 
-          <form action="" className="flex flex-col gap-4">
-            <input type="text" placeholder="Usuario" />
-            <input type="password" placeholder="Contraseña" />
-            <footer className="mx-auto mt-4">
-              <button
-                type="submit"
-                className="rounded-3xl bg-primary px-12 py-3"
-              >
-                Ingresar
-              </button>
-            </footer>
-          </form>
+export function LoginPage() {
+  const emailInput = useId();
+  const passwordInput = useId();
+
+  
+
+  return (
+    <main className="flex min-h-dvh items-center justify-center bg-dark px-5 py-32 font-jakarta-sans text-light">
+      <section className="w-full">
+        <h1 className="text-3xl font-extrabold text-balance">
+          Bienvenido de nuevo
+        </h1>
+        <small className="mt-4 block text-zinc-400">
+          Gestiona tus ahorros de forma inteligente
+        </small>
+
+        <form className="mt-6 flex flex-col">
+          <label htmlFor={emailInput} className="font-semibold">
+            Correo Electronico
+          </label>
+          <input
+            type="email"
+            name="email"
+            id={emailInput}
+            placeholder="nombre@ejemplo.com"
+            className="mt-2 rounded-xl border border-zinc-500 bg-navbar px-3 py-4 text-light focus:outline-primary"
+          />
+
+          <label htmlFor={passwordInput} className="mt-4 font-semibold">
+            Contraseña
+          </label>
+          <input
+            type="password"
+            name="password"
+            id={passwordInput}
+            placeholder="••••••••"
+            className="mt-2 rounded-xl border border-zinc-500 bg-navbar px-3 py-4 text-light placeholder:text-lg placeholder:tracking-widest focus:outline-primary"
+          />
+
+          <button
+            type="submit"
+            className="mt-6 rounded-3xl bg-primary px-12 py-3 font-bold"
+          >
+            Iniciar Sesión
+          </button>
+        </form>
+
+        <div className="my-6 flex items-center gap-3 px-4">
+          <div className="h-px flex-1 bg-zinc-400"></div>
+          <span className="text-xs font-medium text-zinc-400">
+            O CONTINÚA CON
+          </span>
+          <div className="h-px flex-1 bg-zinc-400"></div>
+        </div>
+
+        <div className="flex w-full items-center gap-6">
+          <div className="flex w-full items-center justify-center gap-2 rounded-lg border border-zinc-500 bg-secondary px-5 py-3 font-semibold">
+            <Google className="size-6" />
+            <span>Google</span>
+          </div>
+
+          <div className="flex w-full items-center justify-center gap-2 rounded-lg border border-zinc-500 bg-secondary px-5 py-3 font-semibold">
+            <GitHub className="size-6" />
+            <span>GitHub</span>
+          </div>
         </div>
       </section>
     </main>
