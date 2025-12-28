@@ -1,5 +1,6 @@
 import { PiggiIcon } from '../icons/Piggy';
-import { Link, NavLink } from 'react-router';
+import { Link } from 'react-router';
+import { LoginButton } from '@/components/layout/LoginButton';
 
 export function Header() {
   return (
@@ -10,18 +11,7 @@ export function Header() {
         </Link>
         <span className="text-lg">SavingSaves</span>
       </div>
-      <div>
-        <NavLink
-          to="/login"
-          className={({ isActive }) =>
-            isActive
-              ? 'hidden'
-              : 'rounded-2xl bg-primary px-4 py-2 font-semibold'
-          }
-        >
-          Iniciar Sesion
-        </NavLink>
-      </div>
+      <LoginButton />
     </header>
   );
 }
