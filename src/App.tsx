@@ -1,10 +1,13 @@
 import '@fontsource-variable/plus-jakarta-sans/index.css';
 import { Route, Routes } from 'react-router';
+
 import { HomePage } from '@/pages/Home.tsx';
-import { Header } from '@/components/layout/Header.tsx';
+import { HistoryPage } from '@/pages/History.tsx';
 import { LoginPage } from '@/pages/Login.tsx';
-import { ProtectedRoute } from '@/components/routes/ProtectedRoute.tsx';
 import { Dashboard } from '@/pages/Dashboard.tsx';
+
+import { Header } from '@/components/layout/Header.tsx';
+import { ProtectedRoute } from '@/components/routes/ProtectedRoute.tsx';
 import { PublicLayout } from '@/components/layout/PublicLayout.tsx';
 import { AuthLayout } from '@/components/layout/AuthLayout.tsx';
 
@@ -33,6 +36,14 @@ function App() {
             element={
               <>
                 <Dashboard />
+              </>
+            }
+          />
+          <Route
+            path="/history"
+            element={
+              <>
+                <HistoryPage />
               </>
             }
           />
