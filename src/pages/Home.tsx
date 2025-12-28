@@ -1,8 +1,13 @@
 import { Link } from 'react-router';
 import { Profile } from '@/components/Profile.tsx';
 import { PROFILES } from '@/consts/Profiles.ts';
+import { useAuthStore } from '@/store/authStore';
 
 export function HomePage() {
+  const { isAuthenticated } = useAuthStore();
+
+  const redirectTo = isAuthenticated ? '/dashboard' : '/login';
+
   return (
     <>
       <main className="flex min-h-dvh w-full items-center justify-center bg-dark px-5 pt-32 pb-24 font-jakarta-sans text-light">
@@ -18,7 +23,7 @@ export function HomePage() {
           </p>
 
           <Link
-            to={'/login'}
+            to={redirectTo}
             className="mx-auto mt-12 inline-block rounded-3xl bg-primary px-8 py-3.5 font-semibold"
           >
             Empezar a ahorrar
@@ -35,10 +40,9 @@ export function HomePage() {
             </div>
             <small className="text-sm text-zinc-400">Confían en nosotros</small>
           </div>
-            
-            {/* TODO: Poner imagen */}
+
+          {/* TODO: Poner imagen */}
           <img src="" alt="" />
-          
         </section>
       </main>
     </>
