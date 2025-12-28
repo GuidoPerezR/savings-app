@@ -14,7 +14,7 @@ export function Footer() {
           <span className="text-lg">SavingSaves</span>
         </div>
         <span className="text-zinc-300">
-          La forma mas inteligente de gestionaar tus finanzas personales y
+          La forma mas inteligente de gestionar tus finanzas personales y
           alcanzar tus objetivos de ahorro.
         </span>
       </div>
