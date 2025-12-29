@@ -1,7 +1,7 @@
 import type { ComponentType, SVGProps } from 'react';
 
 type ColorVariant = 'earning' | 'spending' | 'investing';
-type IconType = ComponentType<SVGProps<SVGSVGElement>>;
+export type IconType = ComponentType<SVGProps<SVGSVGElement>>;
 
 export interface DashboardCard {
   title: string;
