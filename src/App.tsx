@@ -10,6 +10,7 @@ import { Header } from '@/components/layout/Header.tsx';
 import { ProtectedRoute } from '@/components/routes/ProtectedRoute.tsx';
 import { PublicLayout } from '@/components/layout/PublicLayout.tsx';
 import { AuthLayout } from '@/components/layout/AuthLayout.tsx';
+import { AddTransactionPage } from '@/pages/AddTransaction.tsx';
 
 function App() {
   return (
@@ -36,6 +37,14 @@ function App() {
             element={
               <>
                 <Dashboard />
+              </>
+            }
+          />
+          <Route
+            path="/add"
+            element={
+              <>
+                <AddTransactionPage />
               </>
             }
           />
