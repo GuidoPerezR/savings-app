@@ -3,6 +3,7 @@ import { Google } from '@/components/icons/Google';
 import { GitHub } from '@/components/icons/Github';
 import { useAuthStore } from '@/store/authStore';
 import { useNavigate } from 'react-router';
+import { supabase } from '@/lib/supabase';
 
 export function LoginPage() {
   const emailInput = useId();
@@ -14,6 +15,18 @@ export function LoginPage() {
     e.preventDefault();
     login();
     navigate('/dashboard');
+  };
+
+  const handleLoginWithGithub = async () => {
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'github',
+      });
+
+      console.log(data);
+    } catch (error) {
+      console.error('Error during GitHub login:', error);
+    }
   };
 
   return (
@@ -66,15 +79,18 @@ export function LoginPage() {
         </div>
 
         <div className="flex w-full items-center gap-6">
-          <div className="flex w-full items-center justify-center gap-2 rounded-lg border border-zinc-500 bg-secondary px-5 py-3 font-semibold">
+          <button className="flex w-full items-center justify-center gap-2 rounded-lg border border-zinc-500 bg-secondary px-5 py-3 font-semibold">
             <Google className="size-6" />
             <span>Google</span>
-          </div>
+          </button>
 
-          <div className="flex w-full items-center justify-center gap-2 rounded-lg border border-zinc-500 bg-secondary px-5 py-3 font-semibold">
+          <button
+            className="flex w-full items-center justify-center gap-2 rounded-lg border border-zinc-500 bg-secondary px-5 py-3 font-semibold"
+            onClick={handleLoginWithGithub}
+          >
             <GitHub className="size-6" />
             <span>GitHub</span>
-          </div>
+          </button>
         </div>
       </section>
     </main>
