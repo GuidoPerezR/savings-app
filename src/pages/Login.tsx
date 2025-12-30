@@ -24,6 +24,7 @@ export function LoginPage() {
       });
 
       console.log(data);
+      console.log(error);
     } catch (error) {
       console.error('Error during GitHub login:', error);
     }
