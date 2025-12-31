@@ -10,7 +10,11 @@ export function ProtectedRoute({
   children,
   redirectTo = '/login',
 }: ProtectedRouteProps) {
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, isLoading } = useAuthStore();
+  
+  if (isLoading) {
+    return null; // O un spinner de carga
+  }
 
   if (!isAuthenticated) {
     return <Navigate to={redirectTo} replace />;

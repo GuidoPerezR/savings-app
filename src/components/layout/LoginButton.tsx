@@ -3,7 +3,11 @@ import { useAuthStore } from '@/store/authStore';
 import { Profile } from '../Profile';
 
 export function LoginButton() {
-  const { isAuthenticated, logout } = useAuthStore();
+  const user = useAuthStore((state) => state.user);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const logout = useAuthStore((state) => state.logout);
+
+  const name = user?.user_metadata?.full_name.split(' ')[0] || 'Usuario';
 
   if (!isAuthenticated) {
     return (
@@ -21,7 +25,7 @@ export function LoginButton() {
   return (
     <div className="flex items-center gap-4">
       <div className="flex flex-col items-end">
-        <span className="font-semibold">Hola, Guido</span>
+        <span className="font-semibold">Hola, {name}</span>
         <button
           onClick={logout}
           className="cursor-pointer text-sm text-zinc-400"
