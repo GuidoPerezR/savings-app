@@ -1,7 +1,6 @@
 import { useId } from 'react';
 import { Google } from '@/components/icons/Google';
 import { GitHub } from '@/components/icons/Github';
-import { useAuthStore } from '@/store/authStore';
 import { useNavigate } from 'react-router';
 import { supabase } from '@/lib/supabase';
 
@@ -9,24 +8,23 @@ export function LoginPage() {
   const emailInput = useId();
   const passwordInput = useId();
   const navigate = useNavigate();
-  const login = useAuthStore((state) => state.login);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    login();
+    // login();
     navigate('/dashboard');
   };
 
   const handleLoginWithGithub = async () => {
-    try {
-      const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: 'github',
-      });
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'github',
+      options: {
+        redirectTo: `${import.meta.env.VITE_APP_BASE_URL}/dashboard`,
+      },
+    });
 
-      console.log(data);
-      console.log(error);
-    } catch (error) {
-      console.error('Error during GitHub login:', error);
+    if (error) {
+      throw new Error(error.message);
     }
   };
 
