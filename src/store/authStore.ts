@@ -1,15 +1,34 @@
 import { create } from 'zustand';
+import type { User as UserType } from '@supabase/supabase-js';
+import { supabase } from '@/lib/supabase';
 
+type User = UserType | null;
 interface AuthStore {
   isAuthenticated: boolean;
-  login: () => void;
-  logout: () => void;
+  user: User;
+  isLoading: boolean;
+  setUser: (user: User) => void;
+  logout: () => Promise<void>;
 }
 
 export const useAuthStore = create<AuthStore>((set) => ({
   isAuthenticated: false,
+  user: null,
+  isLoading: true,
 
-  login: () => set({ isAuthenticated: true }),
-  
-  logout: () => set({ isAuthenticated: false }),
+  setUser: (user: User) =>
+    set({
+      user,
+      isAuthenticated: !!user,
+      isLoading: false,
+    }),
+
+  logout: async () => {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      throw new Error(error.message);
+    }
+    set({ isAuthenticated: false, user: null });
+  },
 }));
