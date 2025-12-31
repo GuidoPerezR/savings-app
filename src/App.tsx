@@ -11,8 +11,19 @@ import { ProtectedRoute } from '@/components/routes/ProtectedRoute.tsx';
 import { PublicLayout } from '@/components/layout/PublicLayout.tsx';
 import { AuthLayout } from '@/components/layout/AuthLayout.tsx';
 import { AddTransactionPage } from '@/pages/AddTransaction.tsx';
+import { useEffect } from 'react';
+import { supabase } from './lib/supabase';
+import { useAuthStore } from './store/authStore';
 
 function App() {
+  const setUser = useAuthStore((state) => state.setUser);
+
+  useEffect(() => {
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+  }, [setUser]);
+
   return (
     <>
       <Header />
