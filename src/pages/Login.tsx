@@ -3,11 +3,19 @@ import { Google } from '@/components/icons/Google';
 import { GitHub } from '@/components/icons/Github';
 import { useNavigate } from 'react-router';
 import { supabase } from '@/lib/supabase';
+import { useAuthStore } from '@/store/authStore';
+import { BASE_URL } from '@/consts/Base.ts';
 
 export function LoginPage() {
   const emailInput = useId();
   const passwordInput = useId();
   const navigate = useNavigate();
+
+  const { isAuthenticated } = useAuthStore();
+
+  if (isAuthenticated) {
+    navigate('/');
+  }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,7 +27,7 @@ export function LoginPage() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'github',
       options: {
-        redirectTo: `${import.meta.env.VITE_APP_BASE_URL}/dashboard`,
+        redirectTo: `${BASE_URL}/dashboard`,
       },
     });
 
