@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router';
 import { HomePage } from '@/pages/Home.tsx';
 import { HistoryPage } from '@/pages/History.tsx';
 import { LoginPage } from '@/pages/Login.tsx';
+import { VerifyEmailPage } from '@/pages/VerifyEmail.tsx';
 import { Dashboard } from '@/pages/Dashboard.tsx';
 
 import { Header } from '@/components/layout/Header.tsx';
@@ -33,6 +34,7 @@ function App() {
         <Route element={<PublicLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/verify-email" element={<VerifyEmailPage />} />
         </Route>
 
         {/* Protected Routes */}
