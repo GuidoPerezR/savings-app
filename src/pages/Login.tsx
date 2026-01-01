@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { useEffect, useId } from 'react';
 import { Google } from '@/components/icons/Google';
 import { GitHub } from '@/components/icons/Github';
 import { useNavigate } from 'react-router';
@@ -8,19 +8,33 @@ import { BASE_URL } from '@/consts/Base.ts';
 
 export function LoginPage() {
   const emailInput = useId();
-  const passwordInput = useId();
   const navigate = useNavigate();
 
   const { isAuthenticated } = useAuthStore();
 
-  if (isAuthenticated) {
-    navigate('/');
-  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated, navigate]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // login();
-    navigate('/dashboard');
+    const formData = new FormData(e.target as HTMLFormElement);
+    const email = formData.get('email') as string;
+
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: {
+        emailRedirectTo: `${BASE_URL}/dashboard`,
+      },
+    });
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    navigate('/verify-email');
   };
 
   const handleLoginWithGithub = async () => {
@@ -31,6 +45,18 @@ export function LoginPage() {
       },
     });
 
+    if (error) {
+      throw new Error(error.message);
+    }
+  };
+
+  const handleLoginWithGoogle = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${BASE_URL}/dashboard`,
+      },
+    });
     if (error) {
       throw new Error(error.message);
     }
@@ -58,17 +84,6 @@ export function LoginPage() {
             className="mt-2 rounded-xl border border-zinc-500 bg-navbar px-3 py-4 text-light focus:outline-primary"
           />
 
-          <label htmlFor={passwordInput} className="mt-4 font-semibold">
-            Contraseña
-          </label>
-          <input
-            type="password"
-            name="password"
-            id={passwordInput}
-            placeholder="••••••••"
-            className="mt-2 rounded-xl border border-zinc-500 bg-navbar px-3 py-4 text-light placeholder:text-lg placeholder:tracking-widest focus:outline-primary"
-          />
-
           <button
             type="submit"
             className="mt-6 rounded-3xl bg-primary px-12 py-3 font-bold"
@@ -86,7 +101,10 @@ export function LoginPage() {
         </div>
 
         <div className="flex w-full items-center gap-6">
-          <button className="flex w-full items-center justify-center gap-2 rounded-lg border border-zinc-500 bg-secondary px-5 py-3 font-semibold">
+          <button
+            className="flex w-full items-center justify-center gap-2 rounded-lg border border-zinc-500 bg-secondary px-5 py-3 font-semibold"
+            onClick={handleLoginWithGoogle}
+          >
             <Google className="size-6" />
             <span>Google</span>
           </button>
