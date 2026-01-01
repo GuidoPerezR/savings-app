@@ -6,8 +6,14 @@ export function LoginButton() {
   const user = useAuthStore((state) => state.user);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const logout = useAuthStore((state) => state.logout);
+  const isLoadinng = useAuthStore((state) => state.isLoading);
+
+  if (isLoadinng) {
+    return null;
+  }
 
   const name = user?.user_metadata?.full_name.split(' ')[0] || 'Usuario';
+  const userImage = user?.user_metadata?.avatar_url || '';
 
   if (!isAuthenticated) {
     return (
@@ -24,8 +30,11 @@ export function LoginButton() {
 
   return (
     <div className="flex items-center gap-4">
-      <div className="flex flex-col items-end">
-        <span className="font-semibold">Hola, {name}</span>
+      <div className="flex flex-col items-end font-semibold">
+        <div className="flex gap-1">
+          <span>Hola,</span>
+          <span>{name}</span>
+        </div>
         <button
           onClick={logout}
           className="cursor-pointer text-sm text-zinc-400"
@@ -33,10 +42,7 @@ export function LoginButton() {
           Cerrar sesión
         </button>
       </div>
-      <Profile
-        alt="Profile picture of a smiling user"
-        url="https://lh3.googleusercontent.com/aida-public/AB6AXuBww3Yx202itHXwKn7F2uOivUX3fx6BaiXibbd9zUnNxZ52XU-8pCDRUV2vy1KqyYe_iBpllDykKwOYB0Ky_OvIPiFFK6C40Nrfo6M5WDuOm0DFmRwOIi_4vSoYuuWHAM69a2jSg_Qbz2S9XxWM74UrhsAA-8tfBMAdbHXmUcvuhN4K6z2IyQSmOMEQPFE9V_IIj3IT6lo1IpG2i-GYoYqocB56M1VZIgYF_BRzJXTe4-R6pl6lH46Svx-lRemEyjihxF9ZAfaEi50"
-      />
+      <Profile alt="Profile picture of a smiling user" url={userImage} />
     </div>
   );
 }
