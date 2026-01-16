@@ -7,7 +7,9 @@ interface AuthStore {
   isAuthenticated: boolean;
   user: User;
   isLoading: boolean;
+  email: string;
   setUser: (user: User) => void;
+  setEmail: (email: string) => void;
   logout: () => Promise<void>;
 }
 
@@ -15,6 +17,9 @@ export const useAuthStore = create<AuthStore>((set) => ({
   isAuthenticated: false,
   user: null,
   isLoading: true,
+  email: '',
+
+  setEmail: (email: string) => set({ email }),
 
   setUser: (user: User) =>
     set({
@@ -29,6 +34,6 @@ export const useAuthStore = create<AuthStore>((set) => ({
     if (error) {
       throw new Error(error.message);
     }
-    set({ isAuthenticated: false, user: null });
+    set({ isAuthenticated: false, user: null, email: '' });
   },
 }));
