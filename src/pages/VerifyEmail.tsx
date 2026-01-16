@@ -1,17 +1,22 @@
-import { NavLink, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { SavesPig } from '@/components/icons/SavesPig';
 import { useEffect } from 'react';
 import { useAuthStore } from '@/store/authStore';
+import { useLogin } from '@/hooks/useLogin';
 
 export const VerifyEmailPage = () => {
   const navigate = useNavigate();
 
   const { isAuthenticated } = useAuthStore();
+
+  const { handleResendEmail } = useLogin();
+
   useEffect(() => {
     if (isAuthenticated) {
       navigate('/');
     }
   }, [isAuthenticated, navigate]);
+
   return (
     <main className="flex min-h-dvh flex-col items-center justify-center bg-dark px-5 py-32 text-center font-jakarta-sans text-light">
       <div className="mb-6 rounded-full bg-primary p-6">
@@ -27,27 +32,13 @@ export const VerifyEmailPage = () => {
         favor, revisa tu bandeja de entrada (y spam) para confirmar tu cuenta.
       </p>
 
-      <div className="flex flex-col gap-4">
-        {/* <NavLink
-          to="/login"
-          className="rounded-xl bg-primary px-8 py-3 font-semibold text-white transition-colors hover:bg-primary/90"
-        >
-          Volver al inicio de sesión
-        </NavLink> */}
-
-        {/* TODO */}
+      <div className="flex gap-2 text-sm">
+        <span className="text-zinc-400">¿No recibiste el correo?</span>
         <button
-          className="text-sm text-zinc-400 transition-colors hover:text-zinc-600"
-          onClick={() =>
-            alert(
-              'Por favor intenta registrarte nuevamente si no recibiste el correo.',
-            )
-          }
+          className="font-semibold text-primary"
+          onClick={handleResendEmail}
         >
-          ¿No recibiste el correo?{' '}
-          <span className="font-semibold text-primary hover:underline">
-            Reenviar
-          </span>
+          Reenviar
         </button>
       </div>
     </main>
