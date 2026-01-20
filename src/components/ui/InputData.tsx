@@ -1,0 +1,62 @@
+import { useEffect, useRef, useState } from 'react';
+import { useTotalAmounts } from '@/hooks/useTotalAmounts';
+
+type InputDataProps = {
+  amount: number | null;
+  name: string;
+  style: 'sm' | 'lg';
+};
+
+export const InputData = ({ amount, name, style }: InputDataProps) => {
+  const { setAmount } = useTotalAmounts();
+  const [isEditing, setIsEditing] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const totalAmount = amount ?? 0;
+
+  const spanClassName = {
+    sm: 'mt-1 block text-lg font-semibold',
+    lg: 'mt-4 block text-center text-5xl font-bold',
+  };
+
+  const inputClassName = {
+    sm: 'mt-1 w-full text-lg font-semibold',
+    lg: 'mt-4 w-full text-center text-5xl font-bold',
+  };
+
+  useEffect(() => {
+    if (isEditing && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isEditing]);
+
+  const saveAmount = () => {
+    if (!inputRef.current) return;
+    const { name, value } = inputRef.current;
+
+    if (!name) return;
+
+    setIsEditing(false);
+    setAmount({ [name]: Number(value) });
+  };
+
+  if (!isEditing) {
+    return (
+      <span className={spanClassName[style]} onClick={() => setIsEditing(true)}>
+        ${totalAmount.toFixed(2)}
+      </span>
+    );
+  }
+
+  return (
+    <input
+      ref={inputRef}
+      name={name}
+      type="number"
+      defaultValue={totalAmount}
+      onKeyDown={(e) => e.key === 'Enter' && saveAmount()}
+      onBlur={saveAmount}
+      className={inputClassName[style]}
+    />
+  );
+};
