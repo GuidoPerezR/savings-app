@@ -1,6 +1,7 @@
 import type { DashboardCard } from '@/types/DashboardCards';
 import { DashboardArticle } from './DashboardArticle';
 import { InputData } from './InputData';
+import { useTotalAmountStore } from '@/store/totalAmountStore';
 
 const variantColors = {
   earning: 'bg-green-500/10 text-earning',
@@ -14,6 +15,9 @@ export function DashboardCard({
   color,
   inputName,
 }: DashboardCard) {
+  
+  const totalAmounts = useTotalAmountStore((state) => state.totalAmounts);
+
   return (
     <DashboardArticle>
       <div className="flex flex-col gap-2">
@@ -24,7 +28,11 @@ export function DashboardCard({
         </div>
         <h3 className="text-sm text-light/80">{title}</h3>
       </div>
-      <InputData amount={0} name={inputName} style={'sm'} />
+      <InputData
+        amount={totalAmounts?.[inputName] ?? 0}
+        name={inputName}
+        style={'sm'}
+      />
     </DashboardArticle>
   );
 }
