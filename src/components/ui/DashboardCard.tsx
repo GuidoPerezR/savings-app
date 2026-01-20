@@ -1,5 +1,6 @@
 import type { DashboardCard } from '@/types/DashboardCards';
 import { DashboardArticle } from './DashboardArticle';
+import { InputData } from './InputData';
 
 const variantColors = {
   earning: 'bg-green-500/10 text-earning',
@@ -10,8 +11,8 @@ const variantColors = {
 export function DashboardCard({
   title,
   icon: Icon,
-  amount,
   color,
+  inputName,
 }: DashboardCard) {
   return (
     <DashboardArticle>
@@ -23,9 +24,7 @@ export function DashboardCard({
         </div>
         <h3 className="text-sm text-light/80">{title}</h3>
       </div>
-      <span className="mt-1 block text-lg font-semibold text-light">
-        ${amount}
-      </span>
+      <InputData amount={0} name={inputName} style={'sm'} />
     </DashboardArticle>
   );
 }

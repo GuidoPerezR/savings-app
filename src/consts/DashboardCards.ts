@@ -8,25 +8,25 @@ export const DASHBOARD_CARDS: DashboardCard[] = [
   {
     title: 'Ganancia Total',
     icon: ArrowUp,
-    amount: 12345.67,
     color: 'earning',
+    inputName: 'total_earnings',
   },
   {
     title: 'Gasto Total',
     icon: ArrowDown,
-    amount: 6789.01,
+    inputName: 'total_spendings',
     color: 'spending',
   },
   {
     title: 'Total Invertido',
     icon: ChartLine,
-    amount: 5555.55,
     color: 'investing',
+    inputName: 'total_invested',
   },
   {
     title: 'Ahorro Personal',
     icon: SavesPig,
-    amount: 4444.44,
     color: 'earning',
+    inputName: 'total_savings',
   },
 ];
