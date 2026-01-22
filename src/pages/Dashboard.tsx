@@ -1,27 +1,22 @@
-import { DASHBOARD_CARDS } from '@/consts/DashboardCards.ts';
-import { DashboardCard } from '@/components/ui/DashboardCard.tsx';
 import { TRANSACTIONS } from '@/mocks/Transactions.ts';
 import { Transaction } from '@/components/ui/Transaction.tsx';
 import { DashboardArticle } from '@/components/ui/DashboardArticle.tsx';
-import { InputData } from '@/components/ui/InputData';
 import { useEffect } from 'react';
-import { useTotalAmountStore } from '@/store/totalAmountStore';
-import { getTotalAmounts } from '@/functions/totalAmounts';
+import { getTotalAmounts } from '@/services/totalAmounts';
 import { useAuthStore } from '@/store/authStore';
+import { useTotalAmountStore } from '@/store/totalAmountStore';
+import { InputData } from '@/components/ui/InputData';
+import { DASHBOARD_CARDS } from '@/consts/DashboardCards';
+import { DashboardCard } from '@/components/ui/DashboardCard';
 
 export function Dashboard() {
   const user = useAuthStore((state) => state.user);
-  const totalAmounts = useTotalAmountStore((state) => state.totalAmounts);
   const setTotalAmounts = useTotalAmountStore((state) => state.setTotalAmounts);
 
   useEffect(() => {
     const getData = async () => {
-      try {
-        const data = await getTotalAmounts(user?.id || '');
-        setTotalAmounts(data);
-      } catch (error) {
-        console.error('Error fetching total amounts:', error);
-      }
+      const data = await getTotalAmounts(user?.id || '');
+      setTotalAmounts(data);
     };
     getData();
   }, [setTotalAmounts, user?.id]);
@@ -33,11 +28,7 @@ export function Dashboard() {
           <h3 className="text-center font-semibold text-light/80 uppercase">
             Saldo total actual
           </h3>
-          <InputData
-            amount={totalAmounts?.current_balance ?? 0}
-            name={'current_balance'}
-            style="lg"
-          />
+          <InputData name={'current_balance'} style="lg" />
 
           <div className="mt-4 flex items-center justify-center gap-2">
             <span className="w-fit rounded-lg bg-green-500/10 px-2 text-sm text-earning">
