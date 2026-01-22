@@ -17,7 +17,7 @@ import { supabase } from './lib/supabase';
 import { useAuthStore } from './store/authStore';
 
 function App() {
-  const setUser = useAuthStore((state) => state.setUser);
+  const setUser = useAuthStore((state) => state.actions.setUser);
 
   useEffect(() => {
     supabase.auth.onAuthStateChange((_event, session) => {

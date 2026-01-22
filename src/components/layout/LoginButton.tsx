@@ -5,7 +5,7 @@ import { Profile } from '../Profile';
 export function LoginButton() {
   const user = useAuthStore((state) => state.user);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const logout = useAuthStore((state) => state.logout);
+  const logout = useAuthStore((state) => state.actions.logout);
   const isLoadinng = useAuthStore((state) => state.isLoading);
 
   if (isLoadinng) {
