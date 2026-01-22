@@ -1,21 +1,26 @@
 import { useEffect, useRef, useState } from 'react';
-import { setAmount } from '@/functions/totalAmounts';
+import { setAmount } from '@/services/totalAmounts';
 import { useAuthStore } from '@/store/authStore';
 import { useTotalAmountStore } from '@/store/totalAmountStore';
 
 type InputDataProps = {
-  amount: number | null;
-  name: string;
+  name:
+    | 'current_balance'
+    | 'total_earnings'
+    | 'total_spendings'
+    | 'total_invested'
+    | 'total_savings';
   style: 'sm' | 'lg';
 };
 
-export const InputData = ({ amount, name, style }: InputDataProps) => {
+export const InputData = ({ name, style }: InputDataProps) => {
   const user = useAuthStore((state) => state.user);
   const setTotalAmounts = useTotalAmountStore((state) => state.setTotalAmounts);
+  const totalAmounts = useTotalAmountStore((state) => state.totalAmounts);
   const [isEditing, setIsEditing] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const totalAmount = amount ?? 0;
+  const totalAmount = totalAmounts?.[name] ?? 0;
 
   const spanClassName = {
     sm: 'mt-1 block text-lg font-semibold',
