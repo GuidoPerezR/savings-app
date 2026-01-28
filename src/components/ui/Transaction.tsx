@@ -1,41 +1,42 @@
-import { SavesPig } from '../icons/SavesPig';
-import type { Transaction as TransactionType } from '@/types/Transactions';
+import type { TransactionWithCategory } from '@/types/Transactions';
+import { CATEGORY_ICONS } from '@/consts/Categories';
+import type { CategoryName } from '@/types/Categories';
 
-type Props = Omit<TransactionType, 'id'>;
-
-const categories: Record<
-  number,
-  React.ComponentType<React.SVGProps<SVGSVGElement>>
-> = {
-  1: SavesPig,
-  // 2: OtroIcono,
-};
+type Props = Omit<TransactionWithCategory, 'id'>;
 
 export const Transaction = ({
-  categoryId,
+  categories,
   title,
   date,
   amount,
   type,
 }: Props) => {
   const textColor = {
-    earning: 'text-earning',
-    spending: 'text-spending',
+    income: 'text-earning',
+    expense: 'text-spending',
   };
 
-  const Icon = categories[categoryId];
+  const categoryName = categories?.name as CategoryName;
 
-  const amountText = `${type === 'earning' ? '+' : '-'}$${amount}`;
+  const Icon = CATEGORY_ICONS[categoryName];
+
+  const formattedDate = new Date(date).toLocaleDateString('es-MX', {
+    day: '2-digit',
+    month: 'short',
+    year: '2-digit',
+  });
+
+  const amountText = `${type === 'income' ? '+' : '-'}$${amount}`;
 
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-4">
-        <div className={`rounded-full bg-zinc-500/50 p-2`}>
-          {<Icon className="size-6" />}
+        <div className={`rounded-full bg-primary p-2`}>
+          {Icon && <Icon className="size-6 text-zinc-300" />}
         </div>
         <div className="flex flex-col">
           <span className="font-bold">{title}</span>
-          <span className="text-sm text-zinc-400">{date}</span>
+          <span className="text-sm text-zinc-400">{formattedDate}</span>
         </div>
       </div>
       <span className={`font-bold ${textColor[type]}`}>{amountText}</span>
