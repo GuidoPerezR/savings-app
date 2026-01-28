@@ -13,7 +13,7 @@ export const Transaction = ({
 }: Props) => {
   const textColor = {
     income: 'text-earning',
-    expense: 'text-spending',
+    expense: 'text-spending/90',
   };
 
   const categoryName = categories?.name as CategoryName;
