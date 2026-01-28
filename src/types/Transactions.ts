@@ -4,7 +4,7 @@ import type { UserId } from './User';
 export type TransactionType = 'income' | 'expense';
 export interface Transaction {
   id?: number;
-  created_at: EpochTimeStamp;
+  created_at?: EpochTimeStamp;
   title: string;
   date: string;
   amount: number;
