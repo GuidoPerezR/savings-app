@@ -1,0 +1,51 @@
+import { supabase } from '@/lib/supabase';
+import type {
+  Transaction,
+  TransactionWithCategory,
+} from '@/types/Transactions';
+import type { UserId } from '@/types/User';
+
+interface InsertTransactionParams {
+  transaction: Transaction;
+}
+
+export const insertTransaction = async ({
+  transaction,
+}: InsertTransactionParams) => {
+  const { data, error } = await supabase
+    .from('transactions')
+    .insert(transaction)
+    .select();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+  return data;
+};
+
+export const getFiveLastTransactions = async (userId: UserId) => {
+  const { data, error } = await supabase
+    .from('transactions')
+    .select(
+      `
+    id,
+    title,
+    amount,
+    date,
+    type,
+    categories (
+    id,
+      name
+    )
+  `,
+    )
+    .eq('user_id', userId)
+    .order('created_at', { ascending: false })
+    .limit(5);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data as unknown as TransactionWithCategory[];
+};
