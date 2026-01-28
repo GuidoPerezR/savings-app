@@ -1,6 +1,4 @@
-import type { IconType } from './DashboardCards';
-
-type CategoryName =
+export type CategoryName =
   | 'Compras'
   | 'Comida'
   | 'Transporte'
@@ -12,8 +10,11 @@ type CategoryName =
   | 'Regalos'
   | 'Otros';
 
+export type CategoryId = number | null;
+
 export interface Category {
-  id: number;
+  id: CategoryId;
   name: CategoryName;
-  icon: IconType;
+  created_at?: string;
+  // icon: IconType;
 }

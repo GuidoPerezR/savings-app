@@ -1,3 +1,5 @@
+import type { UserId } from './User';
+
 export type TotalAmountData = {
   id: number;
   created_at: Date;
@@ -6,5 +8,5 @@ export type TotalAmountData = {
   total_spendings: number;
   total_invested: number;
   total_savings: number;
-  user_id: string;
+  user_id: UserId;
 } | null;
