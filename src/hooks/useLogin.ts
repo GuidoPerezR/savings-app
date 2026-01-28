@@ -7,7 +7,7 @@ export const useLogin = () => {
   const navigate = useNavigate();
 
   const email = useAuthStore((state) => state.email);
-  const setEmail = useAuthStore((state) => state.setEmail);
+  const setEmail = useAuthStore((state) => state.actions.setEmail);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
