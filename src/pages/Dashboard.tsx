@@ -1,13 +1,13 @@
-import { TRANSACTIONS } from '@/mocks/Transactions.ts';
-import { Transaction } from '@/components/ui/Transaction.tsx';
 import { DashboardArticle } from '@/components/ui/DashboardArticle.tsx';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { getTotalAmounts } from '@/services/totalAmounts';
 import { useAuthStore } from '@/store/authStore';
 import { useTotalAmountStore } from '@/store/totalAmountStore';
 import { InputData } from '@/components/ui/InputData';
 import { DASHBOARD_CARDS } from '@/consts/DashboardCards';
 import { DashboardCard } from '@/components/ui/DashboardCard';
+import { getFiveLastTransactions } from '@/services/transactions';
+import { LastTransactions } from '@/components/ui/LastTransactions';
 
 export function Dashboard() {
   const user = useAuthStore((state) => state.user);
@@ -20,6 +20,8 @@ export function Dashboard() {
     };
     getData();
   }, [setTotalAmounts, user?.id]);
+
+  const getTransactions = getFiveLastTransactions(user?.id || '');
 
   return (
     <main className="flex min-h-dvh w-full items-center justify-center bg-dark px-5 pt-32 pb-24 font-jakarta-sans text-light">
@@ -53,19 +55,9 @@ export function Dashboard() {
         <DashboardArticle className="col-span-2">
           <h2 className="text-lg font-bold text-light">Actividad Reciente</h2>
           <ul className="mt-4 space-y-4">
-            {TRANSACTIONS.map(
-              ({ id, categoryId, title, date, amount, type }) => (
-                <li key={id}>
-                  <Transaction
-                    categoryId={categoryId}
-                    title={title}
-                    date={date}
-                    amount={amount}
-                    type={type}
-                  />
-                </li>
-              ),
-            )}
+            <Suspense fallback={<div>Cargando transacciones...</div>}>
+              <LastTransactions promise={getTransactions} />
+            </Suspense>
           </ul>
         </DashboardArticle>
       </section>
