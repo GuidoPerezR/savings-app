@@ -49,3 +49,39 @@ export const getFiveLastTransactions = async (userId: UserId) => {
 
   return data as unknown as TransactionWithCategory[];
 };
+
+export const getTransactionsHistory = async ({
+  userId,
+  startDate,
+  endDate,
+}: {
+  userId: UserId;
+  startDate: string;
+  endDate: string;
+}) => {
+  const { data, error } = await supabase
+    .from('transactions')
+    .select(
+      `
+    id,
+    title,
+    amount,
+    date,
+    type,
+    categories (
+      id,
+      name
+    )
+  `,
+    )
+    .eq('user_id', userId)
+    .gte('created_at', startDate)
+    .lte('created_at', endDate)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data as unknown as TransactionWithCategory[];
+};
