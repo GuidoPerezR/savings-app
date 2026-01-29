@@ -9,6 +9,14 @@ type LastTransactionsProps = {
 export const LastTransactions = ({ promise }: LastTransactionsProps) => {
   const data = use(promise);
 
+  if (data.length === 0) {
+    return (
+      <p className="py-6 text-center text-zinc-400">
+        No hay transacciones recientes
+      </p>
+    );
+  }
+
   return (
     <>
       {data.map(({ id, categories, title, date, amount, type }) => (
