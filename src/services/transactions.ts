@@ -23,7 +23,7 @@ export const insertTransaction = async ({
   return data;
 };
 
-export const getFiveLastTransactions = async (userId: UserId) => {
+export const getLastTransactions = async (userId: UserId) => {
   const { data, error } = await supabase
     .from('transactions')
     .select(
