@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { setAmount } from '@/services/totalAmounts';
-import { useAuthStore } from '@/store/authStore';
 import { useTotalAmountStore } from '@/store/totalAmountStore';
+import { useAmountsData } from '@/hooks/useAmountsData';
 
 type InputDataProps = {
   name:
@@ -14,9 +13,9 @@ type InputDataProps = {
 };
 
 export const InputData = ({ name, style }: InputDataProps) => {
-  const user = useAuthStore((state) => state.user);
   const setTotalAmounts = useTotalAmountStore((state) => state.setTotalAmounts);
   const totalAmounts = useTotalAmountStore((state) => state.totalAmounts);
+  const { setAmountsData } = useAmountsData();
   const [isEditing, setIsEditing] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -45,7 +44,11 @@ export const InputData = ({ name, style }: InputDataProps) => {
     if (!name) return;
 
     setIsEditing(false);
-    const data = await setAmount({ [name]: Number(value) }, user?.id || '');
+
+    // Si tiene el mismo valor se retorna y no hace nada
+    if (Number(value) === totalAmount) return;
+
+    const data = await setAmountsData(name, Number(value));
     setTotalAmounts(data);
   };
 
