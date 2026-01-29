@@ -1,27 +1,13 @@
 import { DashboardArticle } from '@/components/ui/DashboardArticle.tsx';
-import { Suspense, useEffect } from 'react';
-import { getTotalAmounts } from '@/services/totalAmounts';
-import { useAuthStore } from '@/store/authStore';
-import { useTotalAmountStore } from '@/store/totalAmountStore';
+import { Suspense } from 'react';
 import { InputData } from '@/components/ui/InputData';
 import { DASHBOARD_CARDS } from '@/consts/DashboardCards';
 import { DashboardCard } from '@/components/ui/DashboardCard';
-import { getFiveLastTransactions } from '@/services/transactions';
 import { LastTransactions } from '@/components/ui/LastTransactions';
+import { useDashboard } from '@/hooks/useDashboard';
 
 export function Dashboard() {
-  const user = useAuthStore((state) => state.user);
-  const setTotalAmounts = useTotalAmountStore((state) => state.setTotalAmounts);
-
-  useEffect(() => {
-    const getData = async () => {
-      const data = await getTotalAmounts(user?.id || '');
-      setTotalAmounts(data);
-    };
-    getData();
-  }, [setTotalAmounts, user?.id]);
-
-  const getTransactions = getFiveLastTransactions(user?.id || '');
+  const { promise } = useDashboard();
 
   return (
     <main className="flex min-h-dvh w-full items-center justify-center bg-dark px-5 pt-32 pb-24 font-jakarta-sans text-light">
@@ -56,7 +42,7 @@ export function Dashboard() {
           <h2 className="text-lg font-bold text-light">Actividad Reciente</h2>
           <ul className="mt-4 space-y-4">
             <Suspense fallback={<div>Cargando transacciones...</div>}>
-              <LastTransactions promise={getTransactions} />
+              <LastTransactions promise={promise} />
             </Suspense>
           </ul>
         </DashboardArticle>
