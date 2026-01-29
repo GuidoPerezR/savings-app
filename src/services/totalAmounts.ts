@@ -2,6 +2,10 @@ import { supabase } from '@/lib/supabase';
 
 type SetAmountParams = {
   current_balance?: number;
+  total_earnings?: number;
+  total_spendings?: number;
+  total_invested?: number;
+  total_savings?: number;
 };
 
 export const getTotalAmounts = async (userId: string) => {
