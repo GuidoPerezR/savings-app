@@ -3,6 +3,7 @@ import { ArrowRight } from '@/components/icons/ArrowRight';
 import { Suspense } from 'react';
 import { HistoryTransactions } from '@/components/ui/HistoryTransactions';
 import { useHistory } from '@/hooks/useHistory';
+import { HistoryTransactionsSkeleton } from '@/components/ui/skeleton/HistoryTransactionsSkeleton';
 
 export const HistoryPage = () => {
   const { period, handleNextPeriod, handlePrevPeriod, promise } = useHistory();
@@ -34,7 +35,7 @@ export const HistoryPage = () => {
           <h3 className="text-lg font-bold">Movimientos</h3>
           <div>
             <ul className="mt-4 space-y-4">
-              <Suspense fallback={<div>Cargando...</div>}>
+              <Suspense fallback={<HistoryTransactionsSkeleton />}>
                 <HistoryTransactions promise={promise} />
               </Suspense>
             </ul>

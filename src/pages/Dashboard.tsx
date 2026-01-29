@@ -5,6 +5,7 @@ import { DASHBOARD_CARDS } from '@/consts/DashboardCards';
 import { DashboardCard } from '@/components/ui/DashboardCard';
 import { LastTransactions } from '@/components/ui/LastTransactions';
 import { useDashboard } from '@/hooks/useDashboard';
+import { LastTransactionsSkeleton } from '@/components/ui/skeleton/LastTransactionsSkeleton';
 
 export function Dashboard() {
   const { promise } = useDashboard();
@@ -41,7 +42,7 @@ export function Dashboard() {
         <DashboardArticle className="col-span-2">
           <h2 className="text-lg font-bold text-light">Actividad Reciente</h2>
           <ul className="mt-4 space-y-4">
-            <Suspense fallback={<div>Cargando transacciones...</div>}>
+            <Suspense fallback={<LastTransactionsSkeleton />}>
               <LastTransactions promise={promise} />
             </Suspense>
           </ul>

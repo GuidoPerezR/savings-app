@@ -2,6 +2,7 @@ import { Suspense, useMemo } from 'react';
 import { Categories } from '@/components/ui/Categories';
 import { getCategories } from '@/services/categories';
 import { useTransactionForm } from '@/hooks/useTransactionForm';
+import { CategoriesSkeleton } from '@/components/ui/skeleton/CategoriesSkeleton';
 
 export const AddTransactionForm = () => {
   const {
@@ -81,7 +82,7 @@ export const AddTransactionForm = () => {
         <label className="font-semibold">Categoria</label>
 
         <div className="mt-2 grid grid-cols-5 gap-3">
-          <Suspense fallback={<div>Cargando...</div>}>
+          <Suspense fallback={<CategoriesSkeleton />}>
             <Categories promise={fetchCategories} />
           </Suspense>
         </div>
