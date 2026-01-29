@@ -10,6 +10,9 @@ export const AddTransactionForm = () => {
     titleValueInput,
     transactionType,
     setTransactionType,
+    onChangeInput,
+    investedAmount,
+    savingAmount,
   } = useTransactionForm();
 
   const fetchCategories = useMemo(() => getCategories(), []);
@@ -36,7 +39,26 @@ export const AddTransactionForm = () => {
           type="number"
           placeholder="$0.00"
           className="h-14 w-full px-2 text-center text-4xl font-bold placeholder:text-4xl placeholder:font-bold placeholder:text-zinc-600 focus:outline-none active:outline-none"
+          onChange={(e) => onChangeInput(e)}
         />
+        {investedAmount > 0 && transactionType === 'income' && (
+          <div className="flex w-full items-center justify-center gap-8 pt-2 text-sm">
+            <div className="flex gap-1">
+              <span className="text-center font-semibold text-investing/80">
+                Inversion:
+              </span>
+              <span className="text-center text-zinc-400">
+                ${investedAmount}
+              </span>
+            </div>
+            <div className="flex gap-1">
+              <span className="text-center font-semibold text-earning/80">
+                Personal:
+              </span>
+              <span className="text-center text-zinc-400">${savingAmount}</span>
+            </div>
+          </div>
+        )}
       </div>
       <div className="mt-8 flex rounded-2xl bg-secondary p-1">
         <button
