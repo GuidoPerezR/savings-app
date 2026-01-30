@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router';
 import { supabase } from '@/lib/supabase';
 import { BASE_URL } from '@/consts/Base';
 import { useAuthStore } from '@/store/authStore';
+import { toast } from '@moaqzdev/toast/utils';
+import { loginWithEmail } from '@/services/user';
 
 export const useLogin = () => {
   const navigate = useNavigate();
@@ -11,22 +13,20 @@ export const useLogin = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    const email = formData.get('email') as string;
-    setEmail(email);
+    try {
+      const formData = new FormData(e.target as HTMLFormElement);
+      const email = formData.get('email') as string;
 
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: {
-        emailRedirectTo: `${BASE_URL}/dashboard`,
-      },
-    });
+      await loginWithEmail(email);
 
-    if (error) {
-      throw new Error(error.message);
+      setEmail(email);
+
+      navigate('/verify-email');
+    } catch (error) {
+      toast.error({
+        title: (error as Error).message,
+      });
     }
-
-    navigate('/verify-email');
   };
 
   const handleLoginWithGithub = async () => {
@@ -55,13 +55,23 @@ export const useLogin = () => {
   };
 
   const handleResendEmail = async () => {
-    const { error } = await supabase.auth.resend({
-      type: 'signup',
-      email,
-    });
+    try {
+      const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email,
+      });
 
-    if (error) {
-      throw new Error(error.message);
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      toast.success({
+        title: 'Correo de verificación reenviado',
+      });
+    } catch (error) {
+      toast.error({
+        title: (error as Error).message,
+      });
     }
   };
 
