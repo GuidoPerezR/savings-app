@@ -4,6 +4,8 @@ import type {
   TransactionWithCategory,
 } from '@/types/Transactions';
 import type { UserId } from '@/types/User';
+import { parse, ValiError } from 'valibot';
+import { transactionSchema } from '@/schemas/Transactions';
 
 interface InsertTransactionParams {
   transaction: Transaction;
@@ -12,15 +14,31 @@ interface InsertTransactionParams {
 export const insertTransaction = async ({
   transaction,
 }: InsertTransactionParams) => {
-  const { data, error } = await supabase
-    .from('transactions')
-    .insert(transaction)
-    .select();
+  try {
+    // Validando info
+    const newTransaction = parse(transactionSchema, transaction);
 
-  if (error) {
-    throw new Error(error.message);
+    const { data, error } = await supabase
+      .from('transactions')
+      .insert(newTransaction)
+      .select();
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return data;
+  } catch (e) {
+    if (e instanceof ValiError) {
+      throw new Error(e.message);
+    }
+
+    if (e instanceof Error) {
+      throw new Error('No se pudo crear la transacción');
+    }
+
+    throw new Error('Unexpected error');
   }
-  return data;
 };
 
 export const getLastTransactions = async (userId: UserId) => {

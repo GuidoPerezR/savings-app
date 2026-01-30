@@ -4,10 +4,12 @@ import { insertTransaction } from '@/services/transactions';
 import type { TransactionType } from '@/types/Transactions';
 import { useAuthStore } from '@/store/authStore';
 import { useTotalAmountData } from './useTotalAmountData';
+import { toast } from '@moaqzdev/toast/utils';
 
 export const useTransactionForm = () => {
   const [investedAmount, setInvestedAmount] = useState(0);
   const [savingAmount, setSavingAmount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const [transactionType, setTransactionType] =
     useState<TransactionType>('income');
 
@@ -25,11 +27,11 @@ export const useTransactionForm = () => {
   const titleValueInput = useRef<HTMLInputElement>(null);
 
   const { setIncome, setExpense } = useTotalAmountData();
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    const inputAmount = parseFloat(amountValueInput.current?.value || '0');
+    const inputAmount = parseFloat(amountValueInput.current?.value ?? '0');
 
     const transaction = {
       title: titleValueInput.current?.value || '',
@@ -40,24 +42,36 @@ export const useTransactionForm = () => {
       user_id: user?.id || '',
     };
 
-    await insertTransaction({ transaction });
+    try {
+      await insertTransaction({ transaction });
 
-    if (transactionType === 'income')
-      await setIncome({
-        amount: inputAmount,
-        investedAmount,
-        savingAmount,
+      if (transactionType === 'income')
+        await setIncome({
+          amount: inputAmount,
+          investedAmount,
+          savingAmount,
+        });
+
+      if (transactionType === 'expense')
+        await setExpense({ amount: inputAmount });
+
+      toast.success({
+        title: 'Movimiento guardado!',
       });
 
-    if (transactionType === 'expense')
-      await setExpense({ amount: inputAmount });
-
-    amountValueInput.current!.value = '';
-    titleValueInput.current!.value = '';
-    setTransactionType('income');
-    resetSelectedCategoryId();
-    setInvestedAmount(0);
-    setSavingAmount(0);
+      amountValueInput.current!.value = '';
+      titleValueInput.current!.value = '';
+      setTransactionType('income');
+      resetSelectedCategoryId();
+      setInvestedAmount(0);
+      setSavingAmount(0);
+    } catch (e) {
+      toast.error({
+        title: (e as Error).message,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,5 +97,6 @@ export const useTransactionForm = () => {
     onChangeInput,
     investedAmount,
     savingAmount,
+    isLoading,
   };
 };
