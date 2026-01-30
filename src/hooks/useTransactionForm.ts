@@ -5,6 +5,7 @@ import type { TransactionType } from '@/types/Transactions';
 import { useAuthStore } from '@/store/authStore';
 import { useTotalAmountData } from './useTotalAmountData';
 import { toast } from '@moaqzdev/toast/utils';
+import { useTotalAmountStore } from '@/store/totalAmountStore';
 
 export const useTransactionForm = () => {
   const [investedAmount, setInvestedAmount] = useState(0);
@@ -22,6 +23,8 @@ export const useTransactionForm = () => {
   );
 
   const user = useAuthStore((state) => state.user);
+
+  const setTotalAmounts = useTotalAmountStore((state) => state.setTotalAmounts);
 
   const amountValueInput = useRef<HTMLInputElement>(null);
   const titleValueInput = useRef<HTMLInputElement>(null);
@@ -45,15 +48,19 @@ export const useTransactionForm = () => {
     try {
       await insertTransaction({ transaction });
 
-      if (transactionType === 'income')
-        await setIncome({
+      if (transactionType === 'income') {
+        const data = await setIncome({
           amount: inputAmount,
           investedAmount,
           savingAmount,
         });
+        setTotalAmounts(data);
+      }
 
-      if (transactionType === 'expense')
-        await setExpense({ amount: inputAmount });
+      if (transactionType === 'expense') {
+        const data = await setExpense({ amount: inputAmount });
+        setTotalAmounts(data);
+      }
 
       toast.success({
         title: 'Movimiento guardado!',
