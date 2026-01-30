@@ -3,6 +3,7 @@ import { Categories } from '@/components/ui/Categories';
 import { getCategories } from '@/services/categories';
 import { useTransactionForm } from '@/hooks/useTransactionForm';
 import { CategoriesSkeleton } from '@/components/ui/skeleton/CategoriesSkeleton';
+import { Loader } from '../icons/Loader';
 
 export const AddTransactionForm = () => {
   const {
@@ -14,6 +15,7 @@ export const AddTransactionForm = () => {
     onChangeInput,
     investedAmount,
     savingAmount,
+    isLoading,
   } = useTransactionForm();
 
   const fetchCategories = useMemo(() => getCategories(), []);
@@ -25,7 +27,6 @@ export const AddTransactionForm = () => {
           Ingresa nombre del movimiento
         </label>
         <input
-          required
           ref={titleValueInput}
           type="text"
           placeholder="Corte de cabello"
@@ -35,7 +36,6 @@ export const AddTransactionForm = () => {
       <div className="mt-2 flex flex-col items-center justify-center">
         <label className="text-sm text-zinc-400">Ingresa el monto</label>
         <input
-          required
           ref={amountValueInput}
           type="number"
           placeholder="$0.00"
@@ -90,9 +90,10 @@ export const AddTransactionForm = () => {
 
       <button
         type="submit"
-        className="mt-6 w-full rounded-2xl bg-primary py-3 font-bold"
+        className="mt-6 flex w-full items-center justify-center rounded-2xl bg-primary py-3 font-bold disabled:cursor-not-allowed disabled:opacity-50"
+        disabled={isLoading}
       >
-        Guardar Movimiento
+        {isLoading ? <Loader /> : 'Guardar Movimiento'}
       </button>
     </form>
   );
