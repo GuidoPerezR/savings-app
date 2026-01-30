@@ -22,15 +22,21 @@ export const getTotalAmounts = async (userId: string) => {
 };
 
 export const setAmount = async (amounts: SetAmountParams, userId: string) => {
-  const { data, error } = await supabase
-    .from('total_amounts')
-    .upsert({ ...amounts, user_id: userId }, { onConflict: 'user_id' })
-    .select()
-    .single();
+  try {
+    const { data, error } = await supabase
+      .from('total_amounts')
+      .upsert({ ...amounts, user_id: userId }, { onConflict: 'user_id' })
+      .select()
+      .single();
 
-  if (error) {
-    throw new Error(error.message);
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return data;
+  } catch (e) {
+    if (e instanceof Error) {
+      throw new Error('Error updating total amounts: ' + e.message);
+    }
   }
-
-  return data;
 };
