@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTotalAmountStore } from '@/store/totalAmountStore';
 import { useAmountsData } from '@/hooks/useAmountsData';
+import { formatAmount } from '@/functions/formatAmount';
+import { toast } from '@moaqzdev/toast/utils';
 
 type InputDataProps = {
   name:
@@ -39,23 +41,35 @@ export const InputData = ({ name, style }: InputDataProps) => {
 
   const saveAmount = async () => {
     if (!inputRef.current) return;
-    const { name, value } = inputRef.current;
 
-    if (!name) return;
+    try {
+      const { name, value } = inputRef.current;
 
-    setIsEditing(false);
+      if (!name) return;
 
-    // Si tiene el mismo valor se retorna y no hace nada
-    if (Number(value) === totalAmount) return;
+      setIsEditing(false);
 
-    const data = await setAmountsData(name, Number(value));
-    setTotalAmounts(data);
+      // Si tiene el mismo valor se retorna y no hace nada
+      if (Number(value) === totalAmount) return;
+
+      const data = await setAmountsData(name, Number(value));
+
+      setTotalAmounts(data);
+
+      toast.success({
+        title: 'Monto actualizado correctamente',
+      });
+    } catch (error) {
+      toast.error({
+        title: (error as Error).message,
+      });
+    }
   };
 
   if (!isEditing) {
     return (
       <span className={spanClassName[style]} onClick={() => setIsEditing(true)}>
-        ${totalAmount.toFixed(2)}
+        {formatAmount(totalAmount)}
       </span>
     );
   }

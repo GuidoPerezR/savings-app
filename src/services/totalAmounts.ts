@@ -36,7 +36,7 @@ export const setAmount = async (amounts: SetAmountParams, userId: string) => {
     return data;
   } catch (e) {
     if (e instanceof Error) {
-      throw new Error('Error updating total amounts: ' + e.message);
+      throw new Error('Error al intentar editar monto');
     }
   }
 };

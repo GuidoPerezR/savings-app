@@ -1,6 +1,7 @@
 import type { TransactionWithCategory } from '@/types/Transactions';
 import { CATEGORY_ICONS } from '@/consts/Categories';
 import type { CategoryName } from '@/types/Categories';
+import { formatAmount } from '@/functions/formatAmount';
 
 type Props = Omit<TransactionWithCategory, 'id'>;
 
@@ -26,7 +27,7 @@ export const Transaction = ({
     year: '2-digit',
   });
 
-  const amountText = `${type === 'income' ? '+' : '-'}$${amount}`;
+  const amountText = `${type === 'income' ? '+' : '-'}${formatAmount(amount)}`;
 
   return (
     <div className="flex items-center justify-between">
