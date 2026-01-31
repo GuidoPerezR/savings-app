@@ -9,16 +9,22 @@ type SetAmountParams = {
 };
 
 export const getTotalAmounts = async (userId: string) => {
-  const { data, error } = await supabase
-    .from('total_amounts')
-    .select('*')
-    .eq('user_id', userId)
-    .single();
+  try {
+    const { data, error } = await supabase
+      .from('total_amounts')
+      .select('*')
+      .eq('user_id', userId)
+      .single();
 
-  if (error) {
-    throw new Error(error.message);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error('Error al obtener los montos totales');
+    }
   }
-  return data;
 };
 
 export const setAmount = async (amounts: SetAmountParams, userId: string) => {
