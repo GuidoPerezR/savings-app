@@ -42,7 +42,7 @@ export default function HomePage() {
           </div>
 
           {/* TODO: Poner imagen */}
-          <img src="" alt="" />
+          {/* <img src="" alt="" /> */}
         </section>
       </main>
     </>

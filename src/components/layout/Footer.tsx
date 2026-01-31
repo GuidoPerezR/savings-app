@@ -8,7 +8,11 @@ export function Footer() {
     <footer className="flex w-full flex-col gap-4 border-t border-t-zinc-500 bg-navbar px-5 py-12 text-light">
       <div className="flex flex-col gap-6">
         <div className="flex items-center gap-3 font-semibold">
-          <Link to="/" className="size-12 rounded-full bg-primary p-2">
+          <Link
+            to="/"
+            className="size-12 rounded-full bg-primary p-2"
+            aria-label="Ir a Inicio"
+          >
             <PiggiIcon />
           </Link>
           <span className="text-lg">SavingSaves</span>
@@ -20,12 +24,13 @@ export function Footer() {
       </div>
       <div className="flex flex-col items-center justify-center gap-4">
         <p className="mt-6 md:text-xl">
-          Hecho por {''}
+          Hecho por
           <a
             href="https://github.com/GuidoPerezR"
-            target="blank"
+            target="_blank"
             rel="noopener noreferrer"
             className="hover:text-secondary"
+            aria-label="Ir a perfil de Github"
           >
             Guidzero
           </a>
@@ -36,6 +41,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-secondary"
+            aria-label="Ir a perfil de Github"
           >
             <GitHub className="size-6 md:size-8" />
           </a>
@@ -44,6 +50,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-secondary"
+            aria-label="Ir a perfil de LinkedIn"
           >
             <LinkedIn className="size-6 md:size-8" />
           </a>

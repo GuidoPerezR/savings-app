@@ -6,7 +6,11 @@ export function Header() {
   return (
     <header className="fixed top-0 flex w-full items-center justify-between gap-2 bg-navbar bg-linear-to-b from-dark to-navbar px-4 py-4 font-jakarta-sans text-light">
       <div className="flex items-center gap-3 font-semibold">
-        <Link to="/" className="size-12 rounded-full bg-primary p-2">
+        <Link
+          to="/"
+          className="size-12 rounded-full bg-primary p-2"
+          aria-label="Ir a Inicio"
+        >
           <PiggiIcon />
         </Link>
         <span className="text-lg">SavingSaves</span>

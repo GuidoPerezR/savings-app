@@ -14,7 +14,7 @@ export const Transaction = ({
 }: Props) => {
   const textColor = {
     income: 'text-earning',
-    expense: 'text-spending/90',
+    expense: 'text-light-red',
   };
 
   const categoryName = categories?.name as CategoryName;
@@ -37,7 +37,7 @@ export const Transaction = ({
         </div>
         <div className="flex flex-col">
           <span className="font-bold">{title}</span>
-          <span className="text-sm text-zinc-400">{formattedDate}</span>
+          <span className="text-sm text-gray">{formattedDate}</span>
         </div>
       </div>
       <span className={`font-bold ${textColor[type]}`}>{amountText}</span>

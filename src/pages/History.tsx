@@ -30,6 +30,7 @@ export default function HistoryPage() {
             href="#"
             className="rounded-full bg-zinc-600 p-2"
             onClick={handlePrevPeriod}
+            aria-label="Ir a periodo anterior"
           >
             <ArrowLeft className="size-6" />
           </a>
@@ -40,6 +41,7 @@ export default function HistoryPage() {
             onClick={
               isLatestPeriod ? (e) => e.preventDefault() : handleNextPeriod
             }
+            aria-label="Ir a periodo siguiente"
             aria-disabled={isLatestPeriod}
           >
             <ArrowRight className="size-6" />

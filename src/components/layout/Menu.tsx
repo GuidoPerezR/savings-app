@@ -9,7 +9,7 @@ export function Menu() {
       <NavLink
         to="/dashboard"
         className={({ isActive }) =>
-          `flex flex-1 flex-col items-center gap-1 saturate-150 ${isActive ? 'text-primary' : 'text-zinc-400'}`
+          `flex flex-1 flex-col items-center gap-1 saturate-150 ${isActive ? 'text-light-purple' : 'text-gray'}`
         }
       >
         <HomeIcon className="size-5" />
@@ -19,6 +19,7 @@ export function Menu() {
       <Link
         to="/add"
         className="-translate-y-5 rounded-full bg-primary p-5 shadow-md shadow-primary/30"
+        aria-label="Agregar movimiento"
       >
         <PlusIcon className="size-5" />
       </Link>
@@ -26,7 +27,7 @@ export function Menu() {
       <NavLink
         to="/history"
         className={({ isActive }) =>
-          `flex flex-1 flex-col items-center gap-1 saturate-150 ${isActive ? 'text-primary' : 'text-zinc-400'}`
+          `flex flex-1 flex-col items-center gap-1 saturate-150 ${isActive ? 'text-light-purple' : 'text-gray'}`
         }
       >
         <Clock className="size-5" />

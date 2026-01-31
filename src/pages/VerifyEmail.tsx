@@ -35,7 +35,7 @@ export default function VerifyEmailPage() {
       <div className="flex gap-2 text-sm">
         <span className="text-zinc-400">¿No recibiste el correo?</span>
         <button
-          className="font-semibold text-primary"
+          className="font-semibold text-light-purple"
           onClick={handleResendEmail}
         >
           Reenviar

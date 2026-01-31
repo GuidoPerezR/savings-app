@@ -14,6 +14,7 @@ export default function AddTransactionPage() {
         <button
           className="rounded-full bg-zinc-600 p-3"
           onClick={handleBackButton}
+          aria-label="Regresar a la página anterior"
         >
           <ArrowBack className="size-4" />
         </button>

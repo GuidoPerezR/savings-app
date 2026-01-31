@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Bloquear acceso a rutas de API o privadas si fuera necesario
+# Disallow: /api/
+
+# Indica la ubicacion del sitemap si lo tienes
+# Sitemap: https://tusitio.com/sitemap.xml
