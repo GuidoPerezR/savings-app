@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import { useAuthStore } from '@/store/authStore';
 import { useLogin } from '@/hooks/useLogin';
 
-export function LoginPage() {
+export default function LoginPage() {
   const emailInput = useId();
   const navigate = useNavigate();
 

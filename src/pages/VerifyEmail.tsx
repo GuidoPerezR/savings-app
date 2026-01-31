@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useAuthStore } from '@/store/authStore';
 import { useLogin } from '@/hooks/useLogin';
 
-export const VerifyEmailPage = () => {
+export default function VerifyEmailPage() {
   const navigate = useNavigate();
 
   const { isAuthenticated } = useAuthStore();
@@ -43,4 +43,4 @@ export const VerifyEmailPage = () => {
       </div>
     </main>
   );
-};
+}

@@ -2,7 +2,7 @@ import { ArrowBack } from '@/components/icons/ArrowBack.tsx';
 import { useNavigate } from 'react-router';
 import { AddTransactionForm } from '@/components/ui/AddTransactionForm';
 
-export const AddTransactionPage = () => {
+export default function AddTransactionPage() {
   const navigate = useNavigate();
   const handleBackButton = () => {
     navigate(-1);
@@ -25,4 +25,4 @@ export const AddTransactionPage = () => {
       </section>
     </main>
   );
-};
+}

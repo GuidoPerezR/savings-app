@@ -5,7 +5,7 @@ import { HistoryTransactions } from '@/components/ui/HistoryTransactions';
 import { useHistory } from '@/hooks/useHistory';
 import { HistoryTransactionsSkeleton } from '@/components/ui/skeleton/HistoryTransactionsSkeleton';
 
-export const HistoryPage = () => {
+export default function HistoryPage() {
   const { period, handleNextPeriod, handlePrevPeriod, promise } = useHistory();
 
   return (
@@ -44,4 +44,4 @@ export const HistoryPage = () => {
       </section>
     </main>
   );
-};
+}

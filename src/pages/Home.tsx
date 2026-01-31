@@ -3,7 +3,7 @@ import { Profile } from '@/components/Profile.tsx';
 import { PROFILES } from '@/consts/Profiles.ts';
 import { useAuthStore } from '@/store/authStore';
 
-export function HomePage() {
+export default function HomePage() {
   const { isAuthenticated } = useAuthStore();
 
   const redirectTo = isAuthenticated ? '/dashboard' : '/login';

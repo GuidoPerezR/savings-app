@@ -7,7 +7,7 @@ import { LastTransactions } from '@/components/ui/LastTransactions';
 import { useDashboard } from '@/hooks/useDashboard';
 import { LastTransactionsSkeleton } from '@/components/ui/skeleton/LastTransactionsSkeleton';
 
-export function Dashboard() {
+export default function Dashboard() {
   const { promise } = useDashboard();
 
   return (
