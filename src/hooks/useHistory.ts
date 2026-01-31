@@ -26,10 +26,15 @@ export const useHistory = () => {
 
   const promise = getTransactionsHistoryData(period.month, period.year);
 
+  const now = new Date();
+  const isLatestPeriod =
+    period.year === now.getFullYear() && period.month === now.getMonth();
+
   return {
     period,
     handleNextPeriod,
     handlePrevPeriod,
     promise,
+    isLatestPeriod,
   };
 };

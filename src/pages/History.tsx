@@ -6,7 +6,19 @@ import { useHistory } from '@/hooks/useHistory';
 import { HistoryTransactionsSkeleton } from '@/components/ui/skeleton/HistoryTransactionsSkeleton';
 
 export default function HistoryPage() {
-  const { period, handleNextPeriod, handlePrevPeriod, promise } = useHistory();
+  const {
+    period,
+    handleNextPeriod,
+    handlePrevPeriod,
+    promise,
+    isLatestPeriod,
+  } = useHistory();
+
+  const nextPeriodClass = `rounded-full p-2 transition-colors ${
+    isLatestPeriod
+      ? 'cursor-not-allowed bg-zinc-800 text-zinc-500'
+      : 'bg-zinc-600 hover:bg-zinc-500'
+  }`;
 
   return (
     <main className="flex min-h-dvh w-full bg-dark px-5 pt-32 pb-24 font-jakarta-sans text-light">
@@ -24,8 +36,11 @@ export default function HistoryPage() {
           <span className="text-lg font-bold">{period.formattedDate}</span>
           <a
             href="#"
-            className="rounded-full bg-zinc-600 p-2"
-            onClick={handleNextPeriod}
+            className={nextPeriodClass}
+            onClick={
+              isLatestPeriod ? (e) => e.preventDefault() : handleNextPeriod
+            }
+            aria-disabled={isLatestPeriod}
           >
             <ArrowRight className="size-6" />
           </a>
