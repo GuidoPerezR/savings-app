@@ -1,9 +1,12 @@
 import { useNavigate } from 'react-router';
-import { supabase } from '@/lib/supabase';
-import { BASE_URL } from '@/consts/Base';
 import { useAuthStore } from '@/store/authStore';
 import { toast } from '@moaqzdev/toast/utils';
-import { loginWithEmail } from '@/services/user';
+import {
+  loginWithEmail,
+  loginWithGithub,
+  loginWithGoogle,
+  resendEmail,
+} from '@/services/user';
 
 export const useLogin = () => {
   const navigate = useNavigate();
@@ -30,40 +33,28 @@ export const useLogin = () => {
   };
 
   const handleLoginWithGithub = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'github',
-      options: {
-        redirectTo: `${BASE_URL}/dashboard`,
-      },
-    });
-
-    if (error) {
-      throw new Error(error.message);
+    try {
+      await loginWithGithub();
+    } catch (error) {
+      toast.error({
+        title: (error as Error).message,
+      });
     }
   };
 
   const handleLoginWithGoogle = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${BASE_URL}/dashboard`,
-      },
-    });
-    if (error) {
-      throw new Error(error.message);
+    try {
+      await loginWithGoogle();
+    } catch (error) {
+      toast.error({
+        title: (error as Error).message,
+      });
     }
   };
 
   const handleResendEmail = async () => {
     try {
-      const { error } = await supabase.auth.resend({
-        type: 'signup',
-        email,
-      });
-
-      if (error) {
-        throw new Error(error.message);
-      }
+      await resendEmail(email);
 
       toast.success({
         title: 'Correo de verificación reenviado',
