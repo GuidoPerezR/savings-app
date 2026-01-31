@@ -18,13 +18,6 @@ export default function Dashboard() {
             Saldo total actual
           </h3>
           <InputData name={'current_balance'} style="lg" />
-
-          <div className="mt-4 flex items-center justify-center gap-2">
-            <span className="w-fit rounded-lg bg-green-500/10 px-2 text-sm text-earning">
-              +2.4%
-            </span>
-            <span className="text-sm text-zinc-400"> vs. mes anterior</span>
-          </div>
         </DashboardArticle>
 
         {DASHBOARD_CARDS.map(
