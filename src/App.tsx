@@ -5,6 +5,7 @@ import { ProtectedRoute } from '@/components/routes/ProtectedRoute.tsx';
 import { lazy, Suspense, useEffect } from 'react';
 import { supabase } from './lib/supabase';
 import { useAuthStore } from './store/authStore';
+import { PageSkeleton } from '@/components/ui/skeleton/PageSkeleton.tsx';
 
 const PublicLayout = lazy(() => import('@/components/layout/PublicLayout.tsx'));
 const AuthLayout = lazy(() => import('@/components/layout/AuthLayout.tsx'));
@@ -27,7 +28,7 @@ function App() {
   return (
     <>
       <Header />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<PageSkeleton />}>
         <Routes>
           {/* Public Routes */}
           <Route element={<PublicLayout />}>
