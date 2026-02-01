@@ -14,7 +14,6 @@ const VerifyEmailPage = lazy(() => import('@/pages/VerifyEmail.tsx'));
 const Dashboard = lazy(() => import('@/pages/Dashboard.tsx'));
 const AddTransactionPage = lazy(() => import('@/pages/AddTransaction.tsx'));
 const HistoryPage = lazy(() => import('@/pages/History.tsx'));
-const AuthCallback = lazy(() => import('@/pages/AuthCallback.tsx'));
 
 function App() {
   const setUser = useAuthStore((state) => state.actions.setUser);
@@ -35,7 +34,6 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/verify-email" element={<VerifyEmailPage />} />
-            <Route path="/auth-callback" element={<AuthCallback />} />
           </Route>
 
           {/* Protected Routes */}

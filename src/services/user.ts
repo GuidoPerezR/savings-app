@@ -23,7 +23,7 @@ export const loginWithGithub = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'github',
       options: {
-        redirectTo: `${BASE_URL}/auth-callback`,
+        redirectTo: `${BASE_URL}/dashboard`,
       },
     });
 
@@ -42,7 +42,7 @@ export const loginWithGoogle = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${BASE_URL}/auth-callback`,
+        redirectTo: `${BASE_URL}/dashboard`,
       },
     });
 
@@ -63,7 +63,7 @@ export const loginWithEmail = async (email: string) => {
     const { error } = await supabase.auth.signInWithOtp({
       email: newEmail,
       options: {
-        emailRedirectTo: `${BASE_URL}/auth-callback`,
+        emailRedirectTo: `${BASE_URL}/dashboard`,
       },
     });
 
