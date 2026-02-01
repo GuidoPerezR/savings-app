@@ -12,9 +12,9 @@ export default function Dashboard() {
 
   return (
     <main className="flex min-h-dvh w-full items-center justify-center bg-dark px-5 pt-32 pb-24 font-jakarta-sans text-light">
-      <section className="grid w-full grid-cols-2 gap-6">
+      <section className="grid w-full max-w-3xl grid-cols-2 gap-6">
         <DashboardArticle className="col-span-2">
-          <h3 className="text-center font-semibold text-light/80 uppercase">
+          <h3 className="text-center font-semibold text-light/80 uppercase md:text-xl">
             Saldo total actual
           </h3>
           <InputData name={'current_balance'} style="lg" />
@@ -33,7 +33,9 @@ export default function Dashboard() {
         )}
 
         <DashboardArticle className="col-span-2">
-          <h2 className="text-lg font-bold text-light">Actividad Reciente</h2>
+          <h2 className="text-lg font-bold text-light md:text-xl">
+            Actividad Reciente
+          </h2>
           <ul className="mt-4 space-y-4">
             <Suspense fallback={<LastTransactionsSkeleton />}>
               <LastTransactions promise={promise} />

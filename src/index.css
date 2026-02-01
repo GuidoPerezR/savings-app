@@ -15,3 +15,9 @@
   --color-light-purple: #b18fff;
   --font-jakarta-sans: 'Plus Jakarta Sans', sans-serif;
 }
+
+.pulse {
+  &:active {
+    transform: scale(95%);
+  }
+}

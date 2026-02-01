@@ -21,29 +21,31 @@ export const AddTransactionForm = () => {
   const fetchCategories = useMemo(() => getCategories(), []);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="mx-auto max-w-xl">
       <div className="flex flex-col items-center justify-center">
-        <label className="text-sm text-zinc-400">
+        <label className="text-sm text-zinc-400 md:text-base">
           Ingresa nombre del movimiento
         </label>
         <input
           ref={titleValueInput}
           type="text"
           placeholder="Corte de cabello"
-          className="h-14 w-full px-2 text-center text-4xl font-bold placeholder:text-4xl placeholder:font-bold placeholder:text-zinc-600 focus:outline-none active:outline-none"
+          className="h-14 w-full px-2 text-center text-4xl font-bold placeholder:text-4xl placeholder:font-bold placeholder:text-zinc-600 focus:outline-none active:outline-none md:mt-3 md:text-5xl md:placeholder:text-5xl"
         />
       </div>
-      <div className="mt-2 flex flex-col items-center justify-center">
-        <label className="text-sm text-zinc-400">Ingresa el monto</label>
+      <div className="mt-2 flex flex-col items-center justify-center lg:mt-6">
+        <label className="text-sm text-zinc-400 md:text-base">
+          Ingresa el monto
+        </label>
         <input
           ref={amountValueInput}
           type="number"
           placeholder="$0.00"
-          className="h-14 w-full px-2 text-center text-4xl font-bold placeholder:text-4xl placeholder:font-bold placeholder:text-zinc-600 focus:outline-none active:outline-none"
+          className="h-14 w-full px-2 text-center text-4xl font-bold placeholder:text-4xl placeholder:font-bold placeholder:text-zinc-600 focus:outline-none active:outline-none md:mt-3 md:text-5xl md:placeholder:text-5xl"
           onChange={(e) => onChangeInput(e)}
         />
         {investedAmount > 0 && transactionType === 'income' && (
-          <div className="flex w-full items-center justify-center gap-8 pt-2 text-sm">
+          <div className="flex w-full items-center justify-center gap-8 pt-2 text-sm md:pt-4 md:text-base">
             <div className="flex gap-1">
               <span className="text-center font-semibold text-investing/80">
                 Inversion:
@@ -64,14 +66,14 @@ export const AddTransactionForm = () => {
       <div className="mt-8 flex rounded-2xl bg-secondary p-1">
         <button
           type="button"
-          className={`flex-1 rounded-2xl py-2 text-center ${transactionType === 'income' && 'bg-primary'}`}
+          className={`flex-1 cursor-pointer rounded-2xl py-2 text-center ${transactionType === 'income' ? 'bg-primary' : 'pulse transition-all duration-300 ease-in-out hover:bg-tertiary'}`}
           onClick={() => setTransactionType('income')}
         >
           Ganancia
         </button>
         <button
           type="button"
-          className={`flex-1 rounded-2xl py-2 text-center ${transactionType === 'expense' && 'bg-primary'}`}
+          className={`flex-1 cursor-pointer rounded-2xl py-2 text-center ${transactionType === 'expense' ? 'bg-primary' : 'pulse transition-all duration-300 ease-in-out hover:bg-tertiary'}`}
           onClick={() => setTransactionType('expense')}
         >
           Gasto
@@ -90,7 +92,7 @@ export const AddTransactionForm = () => {
 
       <button
         type="submit"
-        className="mt-6 flex w-full items-center justify-center rounded-2xl bg-primary py-3 font-bold disabled:cursor-not-allowed disabled:opacity-50"
+        className="pulse mt-6 flex w-full cursor-pointer items-center justify-center rounded-2xl bg-primary py-3 font-bold transition-all duration-300 ease-in-out hover:bg-tertiary disabled:cursor-not-allowed disabled:opacity-50 md:mt-10"
         disabled={isLoading}
       >
         {isLoading ? <Loader /> : 'Guardar Movimiento'}

@@ -20,9 +20,9 @@ export function DashboardCard({
         <div
           className={`flex w-fit items-center rounded-full p-2 ${variantColors[color]}`}
         >
-          <Icon className="size-6" />
+          <Icon className="size-6 md:size-8" />
         </div>
-        <h3 className="text-sm text-light/80">{title}</h3>
+        <h3 className="text-sm text-light/80 md:text-base">{title}</h3>
       </div>
       <InputData name={inputName} style={'sm'} />
     </DashboardArticle>

@@ -33,14 +33,16 @@ export const Transaction = ({
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-4">
         <div className={`rounded-full bg-primary p-2`}>
-          {Icon && <Icon className="size-6 text-zinc-300" />}
+          {Icon && <Icon className="size-6 text-zinc-300 md:size-8" />}
         </div>
         <div className="flex flex-col">
-          <span className="font-bold">{title}</span>
+          <span className="font-bold md:text-lg">{title}</span>
           <span className="text-sm text-gray">{formattedDate}</span>
         </div>
       </div>
-      <span className={`font-bold ${textColor[type]}`}>{amountText}</span>
+      <span className={`font-bold ${textColor[type]} md:text-lg`}>
+        {amountText}
+      </span>
     </div>
   );
 };

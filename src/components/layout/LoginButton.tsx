@@ -20,7 +20,9 @@ export function LoginButton() {
       <NavLink
         to="/login"
         className={({ isActive }) =>
-          isActive ? 'hidden' : 'rounded-2xl bg-primary px-4 py-2 font-semibold'
+          isActive
+            ? 'hidden'
+            : 'rounded-2xl bg-primary px-4 py-2 font-semibold transition-colors duration-200 hover:bg-tertiary'
         }
       >
         Iniciar Sesión
@@ -37,7 +39,7 @@ export function LoginButton() {
         </div>
         <button
           onClick={logout}
-          className="cursor-pointer text-sm text-zinc-400"
+          className="cursor-pointer text-sm text-zinc-400 transition-colors duration-200 hover:text-primary"
         >
           Cerrar sesión
         </button>

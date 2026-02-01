@@ -22,7 +22,7 @@ export default function LoginPage() {
 
   return (
     <main className="flex min-h-dvh items-center justify-center bg-dark px-5 py-32 font-jakarta-sans text-light">
-      <section className="w-full">
+      <section className="w-full max-w-xl">
         <h1 className="text-3xl font-extrabold text-balance">
           Bienvenido de nuevo
         </h1>
@@ -44,7 +44,7 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            className="mt-6 rounded-3xl bg-primary px-12 py-3 font-bold"
+            className="pulse mt-6 cursor-pointer rounded-3xl bg-primary px-12 py-3 font-bold transition-all duration-300 ease-in-out hover:bg-tertiary"
           >
             Iniciar Sesión
           </button>
@@ -60,7 +60,7 @@ export default function LoginPage() {
 
         <div className="flex w-full items-center gap-6">
           <button
-            className="flex w-full items-center justify-center gap-2 rounded-lg border border-zinc-500 bg-secondary px-5 py-3 font-semibold"
+            className="pulse flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg border border-zinc-500 bg-secondary px-5 py-3 font-semibold transition-all duration-300 hover:bg-dark"
             onClick={handleLoginWithGoogle}
           >
             <Google className="size-6" />
@@ -68,7 +68,7 @@ export default function LoginPage() {
           </button>
 
           <button
-            className="flex w-full items-center justify-center gap-2 rounded-lg border border-zinc-500 bg-secondary px-5 py-3 font-semibold"
+            className="pulse flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg border border-zinc-500 bg-secondary px-5 py-3 font-semibold transition-all duration-300 hover:bg-dark"
             onClick={handleLoginWithGithub}
           >
             <GitHub className="size-6" />

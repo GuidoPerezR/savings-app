@@ -14,25 +14,25 @@ export default function HistoryPage() {
     isLatestPeriod,
   } = useHistory();
 
-  const nextPeriodClass = `rounded-full p-2 transition-colors ${
+  const nextPeriodClass = `rounded-full p-2 transition-colors duration-300 ease-in-out ${
     isLatestPeriod
       ? 'cursor-not-allowed bg-zinc-800 text-zinc-500'
-      : 'bg-zinc-600 hover:bg-zinc-500'
+      : 'bg-zinc-600 hover:bg-tertiary'
   }`;
 
   return (
-    <main className="flex min-h-dvh w-full bg-dark px-5 pt-32 pb-24 font-jakarta-sans text-light">
-      <section className="w-full">
+    <main className="flex min-h-dvh w-full justify-center bg-dark px-5 pt-32 pb-24 font-jakarta-sans text-light">
+      <section className="w-full max-w-4xl">
         <h2 className="text-2xl font-bold">Historial y Analisis</h2>
 
         <nav className="mt-6 flex w-full items-center justify-between">
           <a
             href="#"
-            className="rounded-full bg-zinc-600 p-2"
+            className="rounded-full bg-zinc-600 p-2 transition-colors duration-300 ease-in-out hover:bg-tertiary"
             onClick={handlePrevPeriod}
             aria-label="Ir a periodo anterior"
           >
-            <ArrowLeft className="size-6" />
+            <ArrowLeft className="size-6 md:size-8" />
           </a>
           <span className="text-lg font-bold">{period.formattedDate}</span>
           <a
@@ -44,7 +44,7 @@ export default function HistoryPage() {
             aria-label="Ir a periodo siguiente"
             aria-disabled={isLatestPeriod}
           >
-            <ArrowRight className="size-6" />
+            <ArrowRight className="size-6 md:size-8" />
           </a>
         </nav>
 

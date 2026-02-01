@@ -23,7 +23,7 @@ export const CategoryCard = ({ id, name, icon: Icon }: CategoryCardProps) => {
 
   return (
     <button
-      className={`flex flex-col items-center justify-center rounded-xl p-3 ${isSelected}`}
+      className={`flex cursor-pointer flex-col items-center justify-center rounded-xl p-3 transition-colors duration-200 ease-in-out hover:bg-primary ${isSelected}`}
       type="button"
       onClick={() => setSelectedCategoryId(id)}
     >

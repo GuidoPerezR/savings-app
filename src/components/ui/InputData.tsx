@@ -24,13 +24,13 @@ export const InputData = ({ name, style }: InputDataProps) => {
   const totalAmount = totalAmounts?.[name] ?? 0;
 
   const spanClassName = {
-    sm: 'mt-1 block text-lg font-semibold',
-    lg: 'mt-4 block text-center text-5xl font-bold',
+    sm: 'mt-1 block text-lg font-semibold md:text-2xl',
+    lg: 'mt-4 block text-center text-5xl font-bold md:text-6xl',
   };
 
   const inputClassName = {
-    sm: 'mt-1 w-full text-lg font-semibold',
-    lg: 'mt-4 w-full text-center text-5xl font-bold',
+    sm: 'mt-1 w-full text-lg font-semibold md:text-2xl',
+    lg: 'mt-4 w-full text-center text-5xl font-bold md:text-6xl',
   };
 
   useEffect(() => {
