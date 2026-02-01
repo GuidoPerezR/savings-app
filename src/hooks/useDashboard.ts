@@ -2,7 +2,6 @@ import { useTransactionsData } from './useTransactionsData';
 import { useTotalAmountStore } from '@/store/totalAmountStore';
 import { useEffect } from 'react';
 import { useAmountsData } from './useAmountsData';
-import { toast } from '@moaqzdev/toast/utils';
 
 export const useDashboard = () => {
   const setTotalAmounts = useTotalAmountStore((state) => state.setTotalAmounts);
@@ -11,14 +10,8 @@ export const useDashboard = () => {
 
   useEffect(() => {
     const getData = async () => {
-      try {
-        const data = await getTotalAmountsData();
-        setTotalAmounts(data);
-      } catch (error) {
-        toast.error({
-          title: (error as Error).message,
-        });
-      }
+      const data = await getTotalAmountsData();
+      setTotalAmounts(data);
     };
     getData();
   }, [getTotalAmountsData, setTotalAmounts]);
