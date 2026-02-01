@@ -42,7 +42,13 @@ export default function HomePage() {
           </div>
 
           {/* TODO: Poner imagen */}
-          {/* <img src="" alt="" /> */}
+          <div className="mt-12">
+            <img
+              src="/images/hero_image.webp"
+              alt="Imagen principal de Saving Saves"
+              className="size-96 w-full object-contain"
+            />
+          </div>
         </section>
       </main>
     </>
