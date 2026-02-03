@@ -1,73 +1,57 @@
-# React + TypeScript + Vite
+# Savings App 💰
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Una aplicación web para gestionar tus finanzas personales de manera sencilla y visual.
 
-Currently, two official plugins are available:
+## 📋 Descripción
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Savings App es una herramienta de gestión financiera personal que te permite:
 
-## React Compiler
+- **Registrar transacciones**: Agrega ingresos y gastos de forma fácil
+- **Visualizar tu progreso**: Dashboard con resumen de tus finanzas
+- **Historial completo**: Revisa todas tus transacciones pasadas
+- **Categorización inteligente**: Organiza tus gastos por categorías (comida, transporte, salud, educación, etc.)
+- **Autenticación segura**: Login y verificación de email mediante Supabase
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+## 🚀 Características principales
 
-## Expanding the ESLint configuration
+### Para usuarios
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- ✅ Interfaz intuitiva y moderna
+- 📊 Dashboard con estadísticas visuales
+- 💳 Control de ingresos y egresos
+- 📱 Diseño responsive para todos los dispositivos
+- 🔐 Autenticación segura con Google y GitHub
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Para desarrolladores
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- ⚡ Construido con React 19 + TypeScript
+- 🎨 Estilizado con Tailwind CSS
+- 🔥 Hot Module Replacement con Vite
+- 🗄️ Backend con Supabase
+- 📦 Estado con Zustand
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🛠️ Tecnologías
+
+- **Frontend**: React 19, TypeScript, Vite
+- **Estilos**: Tailwind CSS, Plus Jakarta Sans
+- **Backend**: Supabase (Autenticación + Base de datos)
+- **Estado**: Zustand
+- **Validación**: Valibot
+- **Build**: Vite, ESLint, Prettier
+
+## 📁 Estructura del proyecto
+
+```
+src/
+├── components/          # Componentes reutilizables
+│   ├── icons/          # Iconos personalizados
+│   ├── layout/         # Componentes de layout
+│   ├── routes/         # Componentes de rutas
+│   ├── ui/             # Componentes UI
+│   └── skeleton/       # Componentes de carga
+├── pages/              # Páginas principales
+├── lib/                # Utilidades y configuración
+└── store/              # Estado de la aplicación
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**Desarrollado con ❤️ para ayudarte a tomar control de tus finanzas**

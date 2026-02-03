@@ -11,7 +11,7 @@ export default function Dashboard() {
   const { promise } = useDashboard();
 
   return (
-    <main className="flex min-h-dvh w-full items-center justify-center bg-dark px-5 pt-32 pb-24 font-jakarta-sans text-light">
+    <main className="flex min-h-dvh w-full items-center justify-center bg-dark px-5 py-32 font-jakarta-sans text-light">
       <section className="grid w-full max-w-3xl grid-cols-2 gap-6">
         <DashboardArticle className="col-span-2">
           <h3 className="text-center font-semibold text-light/80 uppercase md:text-xl">

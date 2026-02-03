@@ -21,7 +21,7 @@ export default function HistoryPage() {
   }`;
 
   return (
-    <main className="flex min-h-dvh w-full justify-center bg-dark px-5 pt-32 pb-24 font-jakarta-sans text-light">
+    <main className="flex min-h-dvh w-full justify-center bg-dark px-5 py-32 font-jakarta-sans text-light">
       <section className="w-full max-w-4xl">
         <h2 className="text-2xl font-bold">Historial y Analisis</h2>
 
